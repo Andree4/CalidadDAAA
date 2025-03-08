@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Evaluación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #5e5e5e;
+        }
+        input[type="number"] {
+            width: 50px;
+        }
+        .disabled {
+            background-color: #f2f2f2;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .titulos{
+            background-color: rgb(53, 53, 53);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr class="titulos">
+            <th>Categoría</th>
+            <th>Parámetros</th>
+            <th>Cantidad</th>
+            <th>Puntaje</th>
+            <th>Máx.</th>
+        </tr>
+        <!-- Formación Académica -->
+         <tr>
+            <td colspan="5"><b>A. Formación Académica</b></td>
+         </tr>
+        <tr>
+            <td rowspan="4">Formación Profesional</td>
+            <td>Diplomado: 2 puntos (1 por adicional)</td>
+            <td><input type="number" min="0" onchange="calcular()" id="diplomado"></td>
+            <td><input type="text" id="p_diplomado" class="disabled" disabled></td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>Especialidad: 4 puntos (2 por adicional)</td>
+            <td><input type="number" min="0" onchange="calcular()" id="especialidad"></td>
+            <td><input type="text" id="p_especialidad" class="disabled" disabled></td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Maestría: 8 puntos (3 por adicional)</td>
+            <td><input type="number" min="0" onchange="calcular()" id="maestria"></td>
+            <td><input type="text" id="p_maestria" class="disabled" disabled></td>
+            <td>11</td>
+        </tr>
+        <tr>
+            <td>Doctorado: 12 puntos</td>
+            <td><input type="number" min="0" onchange="calcular()" id="doctorado"></td>
+            <td><input type="text" id="p_doctorado" class="disabled" disabled></td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td colspan="3">Subtotal Formación Académica</td>
+            <td><input type="text" id="subtotalA" class="disabled" disabled></td>
+            <td></td>
+        </tr>
+        <!-- Actualización Académica -->
+        <tr>
+            <td colspan="5"><b>B. Actualización Académica</b></td>
+         </tr>
+        <tr>
+            <td>Actualización Académica en Derecho</td>
+            <td>Asistencia a eventos académicos (0.5 puntos c/u)</td>
+            <td><input type="number" min="0" onchange="calcular()" id="actualizacion"></td>
+            <td><input type="text" id="p_actualizacion" class="disabled" disabled></td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td colspan="3">Subtotal Actualización Académica</td>
+            <td><input type="text" id="subtotalB" class="disabled" disabled></td>
+            <td></td>
+        </tr>
+        <!-- Experiencia Profesional -->
+        <tr>
+            <td colspan="5"><b>C. Experiencia Profesional</b></td>
+         </tr>
+        <tr>
+            <td>Experiencia General</td>
+            <td>Ejercicio de la profesión (1 punto/año)</td>
+            <td><input type="number" min="0" onchange="calcular()" id="experiencia"></td>
+            <td><input type="text" id="p_experiencia" class="disabled" disabled></td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Experiencia Especifica</td>
+            <td>Servidor público (1 punto/año)</td>
+            <td><input type="number" min="0" onchange="calcular()" id="servidor"></td>
+            <td><input type="text" id="p_servidor" class="disabled" disabled></td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>Docente universitario (2 puntos por módulo)</td>
+            <td><input type="number" min="0" onchange="calcular()" id="docente"></td>
+            <td><input type="text" id="p_docente" class="disabled" disabled></td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td colspan="3">Subtotal Experiencia Profesional</td>
+            <td><input type="text" id="subtotalC" class="disabled" disabled></td>
+            <td></td>
+        </tr>
+        <!-- Producción Intelectual -->
+        <tr>
+            <td colspan="5"><b>D. Producción Intelectual</b></td>
+         </tr>
+        <tr>
+            <td>Investigaciones y Publicaciones</td>
+            <td>Artículos publicados (1 punto c/u, máx. 2)</td>
+            <td><input type="number" min="0" max="2" onchange="calcular()" id="articulos"></td>
+            <td><input type="text" id="p_articulos" class="disabled" disabled></td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td colspan="3">Subtotal Producción Intelectual</td>
+            <td><input type="text" id="subtotalD" class="disabled" disabled></td>
+            <td></td>
+        </tr>
+        <!-- Total -->
+        <tr>
+            <td colspan="3"><strong>Total</strong></td>
+            <td><input type="text" id="total" class="disabled" disabled></td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td colspan="4">Observaciones
+                <input type="text">
+            </td>
+
+        </tr>
+    </table>
+</body>
+</html>
+
+<script>
+function calcular() {
+    // Definir los valores de puntuación por cada categoría
+    const valores = {
+        diplomado: 2,
+        especialidad: 4,
+        maestria: 8,
+        doctorado: 12,
+        actualizacion: 0.5,
+        experiencia: 1,
+        servidor: 1,
+        docente: 2,
+        articulos: 1
+    };
+
+    // Definir los máximos permitidos para cada categoría
+    const maximos = {
+        p_diplomado: 4,
+        p_especialidad: 6,
+        p_maestria: 11,
+        p_doctorado: 12,
+        p_actualizacion: 6,
+        p_experiencia: 4,
+        p_servidor: 4,
+        p_docente: 2,
+        p_articulos: 2
+    };
+
+    // Calcular el subtotal de Formación Académica
+    let subtotalA = 0;
+    for (let key of ['diplomado', 'especialidad', 'maestria', 'doctorado']) {
+        let cantidad = parseInt(document.getElementById(key).value) || 0;
+        let puntaje = Math.min(cantidad * valores[key], maximos[`p_${key}`]);
+        document.getElementById(`p_${key}`).value = puntaje;
+        subtotalA += puntaje;
+    }
+    document.getElementById("subtotalA").value = Math.min(subtotalA, 12);
+
+    // Calcular el subtotal de Actualización Académica
+    let cantidadActualizacion = parseInt(document.getElementById("actualizacion").value) || 0;
+    let puntajeActualizacion = Math.min(cantidadActualizacion * valores.actualizacion, maximos.p_actualizacion);
+    document.getElementById("p_actualizacion").value = puntajeActualizacion;
+    let subtotalB = puntajeActualizacion;
+    document.getElementById("subtotalB").value = Math.min(subtotalB, 6);
+
+    // Calcular el subtotal de Experiencia Profesional
+    let subtotalC = 0;
+    for (let key of ['experiencia', 'servidor', 'docente']) {
+        let cantidad = parseInt(document.getElementById(key).value) || 0;
+        let puntaje = Math.min(cantidad * valores[key], maximos[`p_${key}`]);
+        document.getElementById(`p_${key}`).value = puntaje;
+        subtotalC += puntaje;
+    }
+    document.getElementById("subtotalC").value = Math.min(subtotalC, 10);
+
+    // Calcular el subtotal de Producción Intelectual
+    let cantidadArticulos = parseInt(document.getElementById("articulos").value) || 0;
+    let puntajeArticulos = Math.min(cantidadArticulos * valores.articulos, maximos.p_articulos);
+    document.getElementById("p_articulos").value = puntajeArticulos;
+    let subtotalD = puntajeArticulos;
+    document.getElementById("subtotalD").value = Math.min(subtotalD, 2);
+
+    // Calcular el total
+    let total = subtotalA + subtotalB + subtotalC + subtotalD;
+    document.getElementById("total").value = Math.min(total, 30);
+}
+</script>
