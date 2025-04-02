@@ -15,3 +15,7 @@ test('Radio negativo', () => {
 test('Radio grande', () => {
     expect(calcularAreaCirculo(1000)).toBeCloseTo(3141592.6536, 4);
 });
+
+test('Radio decimal', () => {
+    expect(calcularAreaCirculo(3.5)).toBeCloseTo(38.4845, 4);
+});
