@@ -11,3 +11,7 @@ test('numero no primo', () => {
 test('Numero negativo', () => {
     expect(numeroPrimo(-3)).toBe(false);
 });
+
+test('Numero primo grande', () => {
+    expect(numeroPrimo(997)).toBe(true);
+});
