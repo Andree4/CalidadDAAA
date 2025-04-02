@@ -7,3 +7,7 @@ test('Radio positivo', () => {
 test('Radio cero', () => {
     expect(calcularAreaCirculo(0)).toBe(0);
 });
+
+test('Radio negativo', () => {
+    expect(calcularAreaCirculo(-3)).toBeNull();
+});

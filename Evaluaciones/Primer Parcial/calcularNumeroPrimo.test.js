@@ -7,3 +7,7 @@ test('Numero primo', () => {
 test('numero no primo', () => {
     expect(numeroPrimo(6)).toBe(false);
 });
+
+test('Numero negativo', () => {
+    expect(numeroPrimo(-3)).toBe(false);
+});
